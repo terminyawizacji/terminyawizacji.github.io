@@ -18,7 +18,7 @@ class Easter {
 
   computeEaster(year) {
     if (year < ALGORITHM_FIRST_VALID_YEAR) {
-      throw "Algorithm invalid before April " + ALGORITHM_FIRST_VALID_YEAR;
+      throw new Error("Algorithm invalid before April " + ALGORITHM_FIRST_VALID_YEAR);
     }
     var golden = (year % 19) + 1;                    /* E1: metonic cycle */
     var century = Math.floor(year / 100) + 1;        /* E2: e.g. 1984 was in 20th C */

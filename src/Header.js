@@ -36,7 +36,6 @@ class Header extends React.Component {
     if (typeof year === 'number' && year >= 2000 && year <= 3000) {
       return true;
     }
-//    alert('Rok musi być liczbą między 2000 a 3000');
     return false;
   }
 
@@ -44,7 +43,7 @@ class Header extends React.Component {
     return (
       <header>
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-          <a class="navbar-brand" href="#">Terminy awizacji</a>
+          <a class="navbar-brand" href="/">Terminy awizacji</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>

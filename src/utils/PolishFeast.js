@@ -2,10 +2,6 @@ import Feast from "./Feast.js";
 
 class PolishFeast extends Feast {
 
-  constructor(date) {
-    super(date);
-  }
-
   static of(date) {
     return new PolishFeast(date);
   }

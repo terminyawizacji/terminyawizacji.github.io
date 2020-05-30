@@ -22,7 +22,7 @@ class MoveableFeast {
     } else if (typeof value === 'number') {
       return new MoveableFeast(Easter.of(value));
     } else {
-      throw 'Unsupported constructor parameter type';
+      throw new Error('Unsupported constructor parameter type');
     }
   }
 
