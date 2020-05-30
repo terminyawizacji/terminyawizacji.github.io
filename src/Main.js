@@ -3,10 +3,10 @@ import Table from './Table';
 
 function Main(props) {
 
-  var year = parseInt(props.year, 10);
-  var month = parseInt(props.month, 10);
-
   const monthsTables = [];
+  const year = parseInt(props.year, 10);
+  const month = parseInt(props.month, 10);
+
   if (isNaN(month)) {
     for(var i = 0; i < 12; i++) {
       monthsTables.push(<Table month={i} year={year}/>);

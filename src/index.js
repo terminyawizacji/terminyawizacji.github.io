@@ -10,7 +10,7 @@ class Welcome extends React.Component {
 
   constructor(props) {
     super(props);
-    var d = new Date();
+    const d = new Date();
     this.state = {year: d.getFullYear(), month: d.getMonth()};
     this.handleSubmit = this.handleSubmit.bind(this);
   }

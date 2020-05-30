@@ -1,12 +1,13 @@
 import React from 'react';
 import Months from './Months';
+import Year from './Year';
 
 class Header extends React.Component {
 
   constructor(props) {
     super(props);
-    var d = new Date();
-    this.state = {year: d.getFullYear(), month: d.getMonth()};
+    const d = new Date();
+    this.state = {year: d.getFullYear(), month: d.getMonth(), valid: true};
     this.handleYearChange = this.handleYearChange.bind(this);
     this.handleMonthChange = this.handleMonthChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -21,18 +22,21 @@ class Header extends React.Component {
   }
 
   handleSubmit(event) {
+    this.setState({valid: true});
     if (this.validate(this.state.year)) {
       this.props.onSubmit(this.state);
+    } else {
+      this.setState({valid: false});
     }
     event.preventDefault();
   }
 
   validate(year) {
     year = parseInt(year, 10);
-    if(typeof year === 'number' && year >= 2000 && year <= 3000) {
+    if (typeof year === 'number' && year >= 2000 && year <= 3000) {
       return true;
     }
-    alert('Rok musi być liczbą między 2000 a 3000');
+//    alert('Rok musi być liczbą między 2000 a 3000');
     return false;
   }
 
@@ -55,8 +59,8 @@ class Header extends React.Component {
 
             <form class="form-inline mt-2 mt-md-0" onSubmit={this.handleSubmit}>
               <Months selected={this.state.month} onChange={this.handleMonthChange}/>
-              <input class="form-control mr-sm-2" type="text" value={this.state.year} onChange={this.handleYearChange}
-              placeholder="Rok" aria-label="Rok" style={{width: '50px'}} maxlength="4" required=""/>
+              <Year value={this.state.year} onChange={this.handleYearChange}
+                validation={this.state.valid}/>
               <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Wybierz</button>
             </form>
           </div>
