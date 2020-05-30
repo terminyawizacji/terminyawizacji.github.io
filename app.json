@@ -1,0 +1,9 @@
+{
+  "name": "terminy awizacji",
+  "description": "A barebones Node.js app using Express 4",
+  "repository": "https://github.com/swojcicki/notice-date",
+  "logo": "https://cdn.rawgit.com/heroku/node-js-getting-started/master/public/node.svg",
+  "keywords": ["terminy", "awizacji", "poczta polska"],
+  "image": "heroku/nodejs"
+}
+
