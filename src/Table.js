@@ -41,7 +41,7 @@ function Table(props) {
   }
 
   return (
-    <div>
+    <div class="pagebreak">
       <h2 class="mt-5">{longName(props.month)} {props.year}</h2>
       <div class="table-responsive">
         <table class="table table-striped table-sm">
