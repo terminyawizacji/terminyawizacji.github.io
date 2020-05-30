@@ -10,7 +10,7 @@ function Year(props) {
   return (
     <div ref={ref}>
       <input class="form-control mr-sm-2" type="text" value={props.value} onChange={props.onChange}
-      placeholder="Rok" aria-label="Rok" style={{width: '50px'}} maxlength="4" required=""
+      placeholder="Rok" aria-label="Rok" style={{textAlign: 'center'}} size="4" maxlength="4" required=""
       ref={target}/>
       <Overlay
       show={!props.validation}

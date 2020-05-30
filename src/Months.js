@@ -10,7 +10,8 @@ function Months(props) {
   }
 
   return (
-    <select class="form-control custom-select d-block mr-sm-2" value={props.selected} onChange={props.onChange}>
+    <select class="form-control custom-select d-block mr-sm-2" style={{textAlignLast: 'center'}}
+      value={props.selected} onChange={props.onChange}>
       <option value="">cały rok</option>
       {options}
     </select>
