@@ -15,7 +15,7 @@
   },
   "scripts": {
     "git-info-local": "echo export default \"{\\\"logMessage\\\": \\\"$(git rev-parse --short HEAD)\\\"}\"  > src/_git_commit.js",
-    "git-info-heroku": "echo export default \"{\\\"logMessage\\\": \\\"$(echo $SOURCE_VERSION)\\\"}\"  > src/_git_commit_heroku.js",
+    "git-info-heroku": "echo export default \"{\\\"logMessage\\\": \\\"$(echo $SOURCE_VERSION | cut -c1-7)\\\"}\"  > src/_git_commit_heroku.js",
     "git-info": "npm run git-info-local; npm run git-info-heroku",
     "dev": "npm run git-info; react-scripts start",
     "start": "serve -s build",
