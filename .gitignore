@@ -1,6 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 .idea
 src/_git_commit.js
+src/_git_commit_heroku.js
 # dependencies
 /node_modules
 /.pnp
