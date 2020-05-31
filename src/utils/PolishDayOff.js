@@ -27,7 +27,7 @@ class PolishDayOff extends DayOff {
 
   isPolishFeast() {
     return this.polishFeast.isNewYear()
-      || this.polishFeast.isEpiphany()
+      || (this.date.getFullYear() >= 2011 && this.polishFeast.isEpiphany())
       || this.polishFeast.isEaster()
       || this.polishFeast.isLabourDay()
       || this.polishFeast.isConstitutionDay()
