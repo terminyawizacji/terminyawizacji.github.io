@@ -1,7 +1,7 @@
 import React from 'react';
 import PolishDayOff from './utils/PolishDayOff.js';
 import {monthNames, daysOfWeek, monthShortNames} from './Const.js';
-import './css/pagebreak.css';
+import './css/table.css';
 
 function Table(props) {
 
