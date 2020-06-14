@@ -1,0 +1,7 @@
+.fromDay {
+  font-size: large !important;
+}
+
+.fromDay ul, .fromDay li {
+  margin-top: 10px;
+}

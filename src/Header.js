@@ -50,15 +50,14 @@ class Header extends React.Component {
           */}
           <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
-          {/*
-              <li class="nav-item">
-                <a class="nav-link" href="#">Zgłoś błąd</a>
-              </li>
-          */}
-            </ul>
+            <li class="nav-item">
+              <a class="nav-link" href="/zdnia">Z dnia</a>
+            </li>
+          </ul>
 
             <form class="form-inline mt-2 mt-md-0" onSubmit={this.handleSubmit}>
-              <Months selected={this.state.month} onChange={this.handleMonthChange}/>
+              <Months selected={this.state.month} onChange={this.handleMonthChange}
+                      wholeYear={true}/>
               <Year value={this.state.year} onChange={this.handleYearChange}
                 validation={this.state.valid}/>
               <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Wybierz</button>
