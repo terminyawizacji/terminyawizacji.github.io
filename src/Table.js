@@ -1,7 +1,8 @@
 import React from 'react';
 import PolishDayOff from './utils/PolishDayOff.js';
-import {monthNames, daysOfWeek, monthShortNames} from './Const.js';
+import {daysOfWeek, monthNames, monthShortNames} from './Const.js';
 import './css/table.css';
+import {NavLink} from "react-router-dom";
 
 function Table(props) {
 
@@ -10,7 +11,7 @@ function Table(props) {
   }
 
   function link(date) {
-    return "/zdnia#" + iso(date);
+    return "/zdnia/" + iso(date);
   }
 
   function iso(date) {
@@ -41,12 +42,12 @@ function Table(props) {
       const courtStorage = PolishDayOff.of(secondNoticeR).findWorkingDayAfterDays(7);
       const courtReturn = PolishDayOff.of(courtStorage).findWorkingDayAfterDays(1);
       rows.push(<tr>
-        <td><a href={link(date)}>{format(date)}</a></td>
-        <td><a href={link(secondNoticeR)}>{format(secondNoticeR)}</a></td>
-        <td><a href={link(admStorage)}>{format(admStorage)}</a></td>
-        <td><a href={link(admReturn)}>{format(admReturn)}</a></td>
-        <td><a href={link((courtStorage))}>{format(courtStorage)}</a></td>
-        <td><a href={link(courtReturn)}>{format(courtReturn)}</a></td>
+        <td><NavLink to={link(date)}>{format(date)}</NavLink></td>
+        <td><NavLink to={link(secondNoticeR)}>{format(secondNoticeR)}</NavLink></td>
+        <td><NavLink to={link(admStorage)}>{format(admStorage)}</NavLink></td>
+        <td><NavLink to={link(admReturn)}>{format(admReturn)}</NavLink></td>
+        <td><NavLink to={link((courtStorage))}>{format(courtStorage)}</NavLink></td>
+        <td><NavLink to={link(courtReturn)}>{format(courtReturn)}</NavLink></td>
       </tr>);
     }
     date.setDate(date.getDate() + 1);

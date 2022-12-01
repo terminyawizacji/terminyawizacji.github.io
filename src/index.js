@@ -3,6 +3,7 @@ import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/sticky-footer-navbar.css';
 import Header from './Header';
@@ -16,23 +17,55 @@ class Page extends React.Component {
   constructor(props) {
     super(props);
     let d = new Date();
-    const url = window.location.href;
-    const lastPart = url.substr(url.lastIndexOf('/') + 1);
-    const lastPartArray = lastPart.split("#");
-    if (lastPartArray.length > 1) {
-      d = new Date(lastPartArray[1]);
+    if (props.match && props.match.params.date) {
+      d = new Date(props.match.params.date);
     }
-    this.state = {year: d.getFullYear(), month: d.getMonth(), day: d.getDate()};
+    this.state = {year: d.getFullYear(), month: d.getMonth(), day: d.getDate(), update: true};
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSubmitDay = this.handleSubmitDay.bind(this);
   }
 
+  componentDidMount() {
+    this.update();
+  }
+
+  componentDidUpdate(prevProps) {
+    this.update();
+  }
+
+  update() {
+    if (this.props.match && this.props.match.params.date) {
+      let tmp = new Date(this.state.year, this.state.month, this.state.day);
+      if (this.props.match.params.date !== this.iso(tmp)) {
+        // if (!this.state.year) {
+        let d = new Date(this.props.match.params.date);
+        this.setState({year: d.getFullYear(), month: d.getMonth(), day: d.getDate(), update: true})
+      }
+    } else {
+      let d = new Date(this.state.year, this.state.month, this.state.day);
+      let now = new Date();
+      if (this.iso(now) !== this.iso(d) && this.state.update) {
+        // if (!this.state.year) {
+        this.setState({year: now.getFullYear(), month: now.getMonth(), day: now.getDate()})
+      }
+    }
+  }
+
+  iso(date) {
+    return date.getFullYear() + '-' +
+      ('0' + (date.getMonth() + 1)).slice(-2) + '-' +
+      ('0' + date.getDate()).slice(-2);
+  }
+
   handleSubmitDay(state) {
-    this.setState({year: state.year, month: state.month, day: state.day});
+    this.setState({update: true});
+    let d = new Date(state.year, state.month, state.day);
+    const {history} = this.props;
+    history.push("/zdnia/" + this.iso(d));
   }
 
   handleSubmit(state) {
-    this.setState({year: state.year, month: state.month});
+    this.setState({year: state.year, month: state.month, update: false});
   }
 
   render() {
@@ -52,22 +85,23 @@ class Page extends React.Component {
 
 class Welcome extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {isTable: true, initDate: null};
-    const url = window.location.href;
-    const lastPart = url.substr(url.lastIndexOf('/') + 1);
-    const lastPartArray = lastPart.split("#");
-    if (lastPartArray[0] === "zdnia") {
-      this.state = {isTable: false};
-    } else {
-      this.state = {isTable: true};
-    }
-  }
-
   render() {
     return <React.StrictMode>
-      <Page table={this.state.isTable}/>
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <Page table={true}/>
+          </Route>
+          <Route exact path="/zdnia"
+                 render={(props) => (
+                   <Page {...props} table={false}/>
+                 )}/>
+          <Route path="/zdnia/:date"
+                 render={(props) => (
+                   <Page {...props} table={false}/>
+                 )}/>
+        </Switch>
+      </Router>
       <Footer/>
     </React.StrictMode>;
   }

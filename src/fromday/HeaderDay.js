@@ -2,6 +2,7 @@ import React from 'react';
 import Months from './../Months';
 import Year from './../Year';
 import Day from './Day';
+import {NavLink} from "react-router-dom";
 
 class HeaderDay extends React.Component {
 
@@ -11,6 +12,7 @@ class HeaderDay extends React.Component {
       year: props.date.year,
       month: props.date.month,
       day: props.date.day,
+      updateFromProps: true,
       validYear: true,
       validDay: true
     };
@@ -20,16 +22,34 @@ class HeaderDay extends React.Component {
     this.handleSubmitDay = this.handleSubmitDay.bind(this);
   }
 
+  componentDidMount() {
+    this.update();
+  }
+
+  componentDidUpdate(prevProps) {
+    this.update();
+  }
+
+  update() {
+    if (this.props.date && this.state.updateFromProps) {
+      if (this.props.date.year !== this.state.year
+        || this.props.date.month !== this.state.month
+        || this.props.date.day !== this.state.day) {
+        this.setState({year: this.props.date.year, month: this.props.date.month, day: this.props.date.day})
+      }
+    }
+  }
+
   handleDayChange(event) {
-    this.setState({day: event.target.value});
+    this.setState({day: event.target.value, updateFromProps: false});
   }
 
   handleYearChange(event) {
-    this.setState({year: event.target.value});
+    this.setState({year: event.target.value, updateFromProps: false});
   }
 
   handleMonthChange(event) {
-    this.setState({month: event.target.value});
+    this.setState({month: event.target.value, updateFromProps: false});
   }
 
   handleSubmitDay(event) {
@@ -48,6 +68,7 @@ class HeaderDay extends React.Component {
     if (validD && validY) {
       this.props.onSubmit(this.state);
     }
+    this.setState({updateFromProps: true});
     event.preventDefault();
   }
 
@@ -71,7 +92,7 @@ class HeaderDay extends React.Component {
     return (
       <header>
         <nav class="navbar navbar-expand navbar-dark fixed-top bg-dark">
-          <a class="navbar-brand" href="/">Terminy awizacji</a>
+          <NavLink className="navbar-brand" to="/">Terminy awizacji</NavLink>
           {/*<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -79,7 +100,7 @@ class HeaderDay extends React.Component {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item active">
-                <a class="nav-link" href="/zdnia">Z dnia</a>
+                <NavLink className="nav-link" to="/zdnia">Z dnia</NavLink>
               </li>
             </ul>
 

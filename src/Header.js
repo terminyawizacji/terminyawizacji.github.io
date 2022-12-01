@@ -1,6 +1,7 @@
 import React from 'react';
 import Months from './Months';
 import Year from './Year';
+import {NavLink} from "react-router-dom";
 
 class Header extends React.Component {
 
@@ -43,17 +44,17 @@ class Header extends React.Component {
     return (
       <header>
         <nav class="navbar navbar-expand navbar-dark fixed-top bg-dark">
-          <a class="navbar-brand" href="/">Terminy awizacji</a>
-        {/*<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <NavLink className="navbar-brand" to="/">Terminy awizacji</NavLink>
+          {/*<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           */}
           <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="/zdnia">Z dnia</a>
-            </li>
-          </ul>
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <NavLink className="nav-link" to="/zdnia">Z dnia</NavLink>
+              </li>
+            </ul>
 
             <form class="form-inline mt-2 mt-md-0" onSubmit={this.handleSubmit}>
               <Months selected={this.state.month} onChange={this.handleMonthChange}
