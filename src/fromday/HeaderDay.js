@@ -12,7 +12,6 @@ class HeaderDay extends React.Component {
       year: props.date.year,
       month: props.date.month,
       day: props.date.day,
-      updateFromProps: true,
       validYear: true,
       validDay: true
     };
@@ -20,36 +19,26 @@ class HeaderDay extends React.Component {
     this.handleMonthChange = this.handleMonthChange.bind(this);
     this.handleDayChange = this.handleDayChange.bind(this);
     this.handleSubmitDay = this.handleSubmitDay.bind(this);
-  }
-
-  componentDidMount() {
-    this.update();
-  }
-
-  componentDidUpdate(prevProps) {
-    this.update();
-  }
-
-  update() {
-    if (this.props.date && this.state.updateFromProps) {
-      if (this.props.date.year !== this.state.year
-        || this.props.date.month !== this.state.month
-        || this.props.date.day !== this.state.day) {
-        this.setState({year: this.props.date.year, month: this.props.date.month, day: this.props.date.day})
-      }
-    }
+    this.handleSubmitToday = this.handleSubmitToday.bind(this);
   }
 
   handleDayChange(event) {
-    this.setState({day: event.target.value, updateFromProps: false});
+    this.setState({day: event.target.value});
   }
 
   handleYearChange(event) {
-    this.setState({year: event.target.value, updateFromProps: false});
+    this.setState({year: event.target.value});
   }
 
   handleMonthChange(event) {
-    this.setState({month: event.target.value, updateFromProps: false});
+    this.setState({month: event.target.value});
+  }
+
+  handleSubmitToday(event) {
+    event.preventDefault();
+    let d = new Date();
+    this.setState({year: d.getFullYear(), month: d.getMonth(), day: d.getDate()});
+    this.props.onSubmit({year: d.getFullYear(), month: d.getMonth(), day: d.getDate()});
   }
 
   handleSubmitDay(event) {
@@ -68,7 +57,6 @@ class HeaderDay extends React.Component {
     if (validD && validY) {
       this.props.onSubmit(this.state);
     }
-    this.setState({updateFromProps: true});
     event.preventDefault();
   }
 
@@ -100,7 +88,7 @@ class HeaderDay extends React.Component {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item active">
-                <NavLink className="nav-link" to="/zdnia">Z dnia</NavLink>
+                <NavLink className="nav-link" to="/zdnia" onClick={this.handleSubmitToday}>Z dnia</NavLink>
               </li>
             </ul>
 
