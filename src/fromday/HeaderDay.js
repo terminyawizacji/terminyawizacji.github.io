@@ -80,7 +80,7 @@ class HeaderDay extends React.Component {
     return (
       <header>
         <nav class="navbar navbar-expand navbar-dark fixed-top bg-dark">
-          <NavLink className="navbar-brand" to="/">Terminy awizacji</NavLink>
+          <NavLink className="navbar-brand" to="/">Terminy awizacji listów poleconych</NavLink>
           {/*<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
