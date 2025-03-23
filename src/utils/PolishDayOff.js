@@ -35,6 +35,7 @@ class PolishDayOff extends DayOff {
       || this.polishFeast.isAssumptionDay()
       || this.polishFeast.isAllSaintsDay()
       || this.polishFeast.isIndependenceDay()
+      || this.polishFeast.isChristmasEve()
       || this.polishFeast.isChristmas();
   }
 

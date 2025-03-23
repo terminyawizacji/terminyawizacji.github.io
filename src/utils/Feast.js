@@ -59,6 +59,10 @@ class Feast {
     return this.date.getMonth() === 10 && this.date.getDate() === 1;
   }
 
+  isChristmasEve() {
+    return this.date.getFullYear() >= 2025 && this.date.getMonth() === 11 && this.date.getDate() === 24;
+  }
+
   isChristmasDay() {
     return this.date.getMonth() === 11 && this.date.getDate() === 25;
   }
