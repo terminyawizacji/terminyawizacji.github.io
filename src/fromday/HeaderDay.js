@@ -22,6 +22,18 @@ class HeaderDay extends React.Component {
     this.handleSubmitToday = this.handleSubmitToday.bind(this);
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.date !== this.props.date) {
+      this.setState({
+        year: this.props.date.year,
+        month: this.props.date.month,
+        day: this.props.date.day,
+        validYear: true,
+        validDay: true
+      });
+    }
+  }
+
   handleDayChange(event) {
     this.setState({day: event.target.value});
   }
@@ -87,8 +99,11 @@ class HeaderDay extends React.Component {
           */}
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
+              <li className="nav-item">
+                <NavLink id="tabelka" className="nav-link" to="/" exact>Tabelka</NavLink>
+              </li>
               <li class="nav-item active">
-                <NavLink className="nav-link" to="/zdnia" onClick={this.handleSubmitToday}>Z dnia</NavLink>
+                <NavLink id="zdnia" className="nav-link" to="/zdnia" onClick={this.handleSubmitToday}>Z dnia</NavLink>
               </li>
             </ul>
 

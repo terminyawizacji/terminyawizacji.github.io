@@ -1,5 +1,9 @@
 @media print {
-  .pagebreak { page-break-before: always; } /* page-break-after works, as well */
+  .pagebreak {
+    page-break-before: always;
+  }
+
+  /* page-break-after works, as well */
 }
 
 tbody tr:hover {
@@ -8,4 +12,18 @@ tbody tr:hover {
 
 tbody a {
   color: #212529 !important;
+}
+
+.center {
+  text-align: center !important;
+}
+
+thead tr th {
+  border-left: 2px solid #dee2e6;
+  border-right: 2px solid #dee2e6;
+}
+
+#tabelka.active {
+  background-color: #666 !important;
+  border-radius: 5px;
 }

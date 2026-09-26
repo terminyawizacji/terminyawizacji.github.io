@@ -14,6 +14,24 @@ class PageFromDay extends React.Component {
     this.handleSubmitDay = this.handleSubmitDay.bind(this);
   }
 
+  componentDidUpdate(prevProps) {
+    const staraData = prevProps.match && prevProps.match.params.date;
+    const nowaData = this.props.match && this.props.match.params.date;
+
+    if (staraData !== nowaData) {
+      let d = new Date();
+      if (nowaData) {
+        d = new Date(nowaData);
+      }
+
+      this.setState({
+        year: d.getFullYear(),
+        month: d.getMonth(),
+        day: d.getDate()
+      });
+    }
+  }
+
   iso(date) {
     return date.getFullYear() + '-' +
       ('0' + (date.getMonth() + 1)).slice(-2) + '-' +

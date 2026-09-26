@@ -2,8 +2,19 @@ import React from 'react';
 import PolishDayOff from './../utils/PolishDayOff.js';
 import {daysOfWeek, monthShortNames} from '../Const';
 import './../css/from-day.css';
+import {NavLink} from "react-router-dom";
 
 function MainDay(props) {
+
+  function link(date) {
+    return "/zdnia/" + iso(date);
+  }
+
+  function iso(date) {
+    return date.getFullYear() + '-' +
+      ('0' + (date.getMonth() + 1)).slice(-2) + '-' +
+      ('0' + date.getDate()).slice(-2);
+  }
 
   function format(date) {
     return daysOfWeek[date.getDay()] + ", "
@@ -50,21 +61,24 @@ function MainDay(props) {
       secondNoticeUl.push(<ul>{secondNoticeLi}</ul>);
     }
     const secondNoticeBody = [];
-    secondNoticeBody.push(<li>awizujemy powtórnie{secondNoticeUl}</li>);
+    secondNoticeBody.push(<li>awizujemy
+      powtórnie {secondNoticeLi.length > 1 ? 'z dni' : 'z dnia'}:{secondNoticeUl}</li>);
 
     const returnAdmUl = [];
     if (returnAdmLi.length > 0) {
       returnAdmUl.push(<ul>{returnAdmLi}</ul>);
     }
     const returnAdmBody = [];
-    returnAdmBody.push(<li>zwracamy administracyjne/podatkowe/ogólne{returnAdmUl}</li>);
+    returnAdmBody.push(<li>zwracamy
+      administracyjne/podatkowe/ogólne {returnAdmLi.length > 1 ? 'z dni' : 'z dnia'}:{returnAdmUl}</li>);
 
     const returnCourtUl = [];
     if (returnCourtLi.length > 0) {
       returnCourtUl.push(<ul>{returnCourtLi}</ul>);
     }
     const returnCourtBody = [];
-    returnCourtBody.push(<li>zwracamy cywilne/karne{returnCourtUl}</li>);
+    returnCourtBody.push(<li>zwracamy
+      cywilne/karne {returnCourtLi.length > 1 ? 'z dni' : 'z dnia'}:{returnCourtUl}</li>);
     content.push(<span>Dnia <strong>{format(end)}</strong></span>);
     content.push(<ul>{secondNoticeBody}
       <li>{returnAdmBody}</li>
@@ -72,10 +86,48 @@ function MainDay(props) {
     </ul>);
   }
 
+  const table = [];
+  const s = new Date(props.year, props.month, props.day);
+  s.setDate(s.getDate() - 14);
+  const e = new Date(props.year, props.month, props.day);
+  e.setDate(e.getDate() + 14);
+  while (s.valueOf() !== e.valueOf()) {
+    const pdoTable = PolishDayOff.of(s);
+    if (pdoTable.isDayOff()) {
+      s.setDate(s.getDate() + 1);
+      continue;
+    }
+    table.push(<tr>
+      <td className={s.valueOf() === end.valueOf() ? 'active-day' : ''}><NavLink to={link(s)}>{format(s)}</NavLink></td>
+    </tr>);
+    s.setDate(s.getDate() + 1);
+  }
+
   return (
     <main role="main" className="flex-shrink-0">
       <div className="container fromDay">
-        {content}
+        <table>
+          <tr>
+            <td valign={"top"}>
+              <table className={"table table-striped table-sm"}>
+                <thead>
+                <tr>
+                  <th>Wybierz dzień:</th>
+                </tr>
+                </thead>
+                <tbody>
+                {table}
+                </tbody>
+              </table>
+            </td>
+            <td width={20}>
+
+            </td>
+            <td valign={"top"}>
+              {content}
+            </td>
+          </tr>
+        </table>
       </div>
     </main>
   );

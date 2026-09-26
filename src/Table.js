@@ -2,22 +2,11 @@ import React from 'react';
 import PolishDayOff from './utils/PolishDayOff.js';
 import {daysOfWeek, monthNames, monthShortNames} from './Const.js';
 import './css/table.css';
-import {NavLink} from "react-router-dom";
 
 function Table(props) {
 
   function longName(month) {
     return monthNames[month];
-  }
-
-  function link(date) {
-    return "/zdnia/" + iso(date);
-  }
-
-  function iso(date) {
-    return date.getFullYear() + '-' +
-      ('0' + (date.getMonth() + 1)).slice(-2) + '-' +
-      ('0' + date.getDate()).slice(-2);
   }
 
   function format(date) {
@@ -42,12 +31,12 @@ function Table(props) {
       const courtStorage = PolishDayOff.of(secondNoticeR).findWorkingDayAfterDays(7);
       const courtReturn = PolishDayOff.of(courtStorage).findWorkingDayAfterDays(1);
       rows.push(<tr>
-        <td><NavLink to={link(date)}>{format(date)}</NavLink></td>
-        <td><NavLink to={link(secondNoticeR)}>{format(secondNoticeR)}</NavLink></td>
-        <td><NavLink to={link(admStorage)}>{format(admStorage)}</NavLink></td>
-        <td><NavLink to={link(admReturn)}>{format(admReturn)}</NavLink></td>
-        <td><NavLink to={link((courtStorage))}>{format(courtStorage)}</NavLink></td>
-        <td><NavLink to={link(courtReturn)}>{format(courtReturn)}</NavLink></td>
+        <td>{format(date)}</td>
+        <td>{format(secondNoticeR)}</td>
+        <td>{format(admStorage)}</td>
+        <td>{format(admReturn)}</td>
+        <td>{format(courtStorage)}</td>
+        <td>{format(courtReturn)}</td>
       </tr>);
     }
     date.setDate(date.getDate() + 1);
@@ -62,8 +51,8 @@ function Table(props) {
           <tr>
             <th width="16.6%"></th>
             <th width="16.6%">Wszystkie</th>
-            <th colspan="2" width="33.3%">Administracyjne/Podatkowe/Ogólne</th>
-            <th colspan="2" width="33.3%">Cywilne/Karne</th>
+            <th colspan="2" width="33.3%" className={"center"}>Administracyjne/Podatkowe/Ogólne</th>
+            <th colspan="2" width="33.3%" className={"center"}>Cywilne/Karne</th>
           </tr>
           <tr>
             <th>I awizo</th>

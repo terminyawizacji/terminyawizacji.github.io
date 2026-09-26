@@ -5,3 +5,12 @@
 .fromDay ul, .fromDay li {
   margin-top: 10px;
 }
+
+.active-day {
+  background-color: #ffff99 !important;
+}
+
+#zdnia.active {
+  background-color: #666 !important;
+  border-radius: 5px;
+}
